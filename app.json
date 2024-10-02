@@ -19,8 +19,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "co.arasdigital.testrnapp"
     },
+      "androidNavigationBar": {
+        "visible": true,
+        "barStyle": "light-content",
+        "backgroundColor": "#000000"
+      },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -31,6 +37,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "033d2aa1-ead2-4817-bc9c-f9dbd8bc9bf0"
+      }
     }
   }
 }
