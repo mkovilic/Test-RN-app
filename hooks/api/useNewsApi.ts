@@ -4,7 +4,8 @@ import { NewsArticle } from "@/constants/NewsArticle";
 
 export function useNewsApi(
     url: string,
-    params: any
+    params: any,
+    refreshOn?: any
 
 ) {
     const [news, setNews] = useState<NewsArticle[]>([]);
@@ -25,7 +26,7 @@ export function useNewsApi(
   
     useEffect(() => {
       fetchNews();
-    }, []);
+    }, [refreshOn]);
 
     return news;
 }

@@ -1,6 +1,6 @@
+import React from "react";
 import { NewsItem } from "@/components/NewsItem";
 import { useNewsApi } from "@/hooks/api/useNewsApi";
-import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function Articles() {
