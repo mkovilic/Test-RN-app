@@ -2,19 +2,32 @@ import React from "react";
 import { NewsItem } from "@/components/NewsItem";
 import { useNewsApi } from "@/hooks/api/useNewsApi";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Loader } from "@/components/Loader";
 
 export default function Articles() {
+  const { news, loading, error } = useNewsApi(
+    "https://newsapi.org/v2/everything",
+    {
+      q: "japan",
+      serachIn: "title,description,content",
+      apiKey: process.env.API_KEY,
+    }
+  );
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Articles</Text>
       </View>
       <FlatList
-        data={useNewsApi("https://newsapi.org/v2/everything", {
-          q: "japan",
-          searchIn: "title,description,content",
-          apiKey: "3ca52dccb8094d808a60331d6e07905b",
-        })}
+        data={news}
         keyExtractor={(item) => item.publishedAt}
         renderItem={({ item }) => <NewsItem item={item} />}
       />

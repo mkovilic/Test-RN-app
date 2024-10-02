@@ -1,26 +1,32 @@
 import { NewsItem } from "@/components/NewsItem";
 import { useNewsApi } from "@/hooks/api/useNewsApi";
 import React from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Loader } from "@/components/Loader";
 
 export default function Index() {
+  const { news, loading, error } = useNewsApi(
+    "https://newsapi.org/v2/top-headlines",
+    { country: "us", apiKey: process.env.API_KEY }
+  );
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.logoText}>News Reader</Text>
       </View>
       <FlatList
-        data={useNewsApi("https://newsapi.org/v2/top-headlines", {
-          country: "us",
-          apiKey: "3ca52dccb8094d808a60331d6e07905b",
-        })}
+        data={news}
         keyExtractor={(item) => item.url}
-        renderItem={ ({ item }) => <NewsItem item={item} />}
+        renderItem={({ item }) => <NewsItem item={item} />}
       />
     </View>
   );

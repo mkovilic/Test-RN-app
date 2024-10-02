@@ -1,16 +1,35 @@
 import React from "react";
-import { Text, View, StyleSheet, TextInput, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList } from "react-native";
 import { useState } from "react";
 import { useNewsApi } from "@/hooks/api/useNewsApi";
 import { NewsItem } from "@/components/NewsItem";
 import { SearchBar } from "@/components/SearchBar";
+import { Loader } from "@/components/Loader";
 
 export default function Search() {
   const [searchText, setSearchText] = useState("");
 
-  const handleTextChange = (text: string) => {
+  const { news, loading, error } = useNewsApi(
+    "https://newsapi.org/v2/everything",
+    {
+      q: searchText || "japan",
+      searchIn: "title",
+      apiKey: process.env.API_KEY,
+    },
+    [searchText]
+  );
+
+  if (loading) {
+    return <Loader/>;
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
+
+  function handleTextChange(text: string) {
     setSearchText(text);
-  };
+  }
 
   console.log("Searching for:", searchText);
   return (
@@ -20,20 +39,12 @@ export default function Search() {
         onChange={handleTextChange}
         onClear={() => setSearchText("")}
       />
-      <Text>Search results</Text>        
+      <Text>Search results</Text>
       <FlatList
-        data={useNewsApi(
-          "https://newsapi.org/v2/everything",
-          {
-            q: searchText || "japan",
-            searchIn: "title",
-            apiKey: "3ca52dccb8094d808a60331d6e07905b",
-          },
-          searchText
-        )}
+        data={news}
         keyExtractor={(item) => item.url}
         renderItem={({ item }) => <NewsItem item={item} />}
-      /> 
+      />
     </View>
   );
 }
