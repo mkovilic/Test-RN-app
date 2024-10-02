@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { NewsArticle } from "../constants/NewsArticle";
+import { NewsArticle } from "../types/NewsArticle";
 import Moment from "moment";
 import { Link } from "expo-router";
 
