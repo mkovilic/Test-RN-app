@@ -20,7 +20,7 @@ export default function Search() {
         onChange={handleTextChange}
         onClear={() => setSearchText("")}
       />
-      <Text>Search results</Text>
+      <Text>Search results</Text>        
       <FlatList
         data={useNewsApi(
           "https://newsapi.org/v2/everything",
@@ -33,7 +33,7 @@ export default function Search() {
         )}
         keyExtractor={(item) => item.url}
         renderItem={({ item }) => <NewsItem item={item} />}
-      />
+      /> 
     </View>
   );
 }
