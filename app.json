@@ -13,20 +13,19 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "co.arasdigital.testrnapp"
+      "package": "co.arasdigital.testrnapp",
+      "runtimeVersion": "1.0.0"
     },
-      "androidNavigationBar": {
-        "visible": true,
-        "barStyle": "light-content",
-        "backgroundColor": "#000000"
-      },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -42,6 +41,9 @@
       "eas": {
         "projectId": "033d2aa1-ead2-4817-bc9c-f9dbd8bc9bf0"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/033d2aa1-ead2-4817-bc9c-f9dbd8bc9bf0"
     }
   }
 }
